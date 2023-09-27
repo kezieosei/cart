@@ -43,7 +43,7 @@ def add_to_cart(user_id,product_id):
         return jsonify({"Error": "Has to be a postive number"}), 400
     
     # Does the product exist 
-     response = requests.get(f'http://127.0.0.1:5000/products/{product_id}')
+     response = requests.get(f'https://product-cn9q.onrender.com/products/{product_id}')
      product = response.json()["products"]
      
      
@@ -51,7 +51,7 @@ def add_to_cart(user_id,product_id):
          return jsonify({"Error": "Product not found"})
 
     # adding the product to cart 
-     response1 = requests.post(f'http://127.0.0.1:5000/products/{product_id}',json={'quantity' : quant})
+     response1 = requests.post(f'https://product-cn9q.onrender.com/products/{product_id}',json={'quantity' : quant})
      if response1.status_code == 200:
           if product_id in cart[user_id - 1]['items']:
               cart[user_id-1]['items'][product_id]['quantity'] += quant
@@ -87,14 +87,14 @@ def remove_from_cart(user_id,product_id):
         return jsonify({"Error": "Has to be a negative number"}), 400
     
     # Does the product exist 
-    response = requests.get(f'http://127.0.0.1:5000/products/{product_id}')
+    response = requests.get(f'https://product-cn9q.onrender.com/products/{product_id}')
     product = response.json()["products"]
       
     if response.status_code == 404:
          return jsonify({"Error": "Product not found"})
 
 # adding the product to cart 
-    response1 = requests.post(f'http://127.0.0.1:5000/products/{product_id}',json={'quantity' : quant})
+    response1 = requests.post(f'https://product-cn9q.onrender.com/products/{product_id}',json={'quantity' : quant})
     if response1.status_code == 200:
         if product_id in cart[user_id - 1]['items']:
             cart[user_id-1]['items'][product_id]['quantity'] += quant
